@@ -1,0 +1,42 @@
+{
+  "twk": "0.2",
+  "id": "twk:til/series/innermost-loop",
+  "kind": "manifest",
+  "title": "The Innermost Loop — TWK series index",
+  "language": "en",
+  "clock": {
+    "kind": "text-locator",
+    "locatorScheme": "anchor"
+  },
+  "media": {
+    "uri": "https://theinnermostloop.substack.com/",
+    "type": "text",
+    "mime": "text/html",
+    "identities": [
+      {
+        "type": "url",
+        "value": "https://theinnermostloop.substack.com/"
+      }
+    ]
+  },
+  "composition": {
+    "documents": [
+      {
+        "id": "twk:til/issue/2026-09-20",
+        "uri": "./til-2026-09-20.document.twk"
+      },
+      {
+        "id": "twk:til/issue/2026-09-13",
+        "uri": "./til-2026-09-13.document.twk"
+      }
+    ]
+  },
+  "provenance": {
+    "revision": 1,
+    "creator": {
+      "type": "agent",
+      "id": "twk-kg-seed"
+    },
+    "note": "Series index for Innermost Loop text-locator documents."
+  }
+}

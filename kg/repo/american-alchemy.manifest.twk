@@ -1,0 +1,45 @@
+{
+  "twk": "0.2",
+  "id": "twk:aa/series/american-alchemy",
+  "kind": "manifest",
+  "title": "American Alchemy — TWK series index",
+  "language": "en",
+  "clock": {
+    "kind": "media-time"
+  },
+  "media": {
+    "uri": "https://www.youtube.com/@JesseMichels",
+    "type": "video",
+    "mime": "video/mp4",
+    "identities": [
+      {
+        "type": "youtube",
+        "value": "UCuG2KzrIMe3qoNcuDVpwnXw"
+      }
+    ]
+  },
+  "composition": {
+    "documents": [
+      {
+        "id": "twk:aa/episode/drumm-pyramids-2026-09-19",
+        "uri": "./drumm-pyramids.document.twk"
+      },
+      {
+        "id": "twk:aa/episode/grant-cameron-2026-09-15",
+        "uri": "./grant-cameron.document.twk"
+      },
+      {
+        "id": "twk:aa/episode/ellsworth-woods-johnson-2026-09-07",
+        "uri": "./ellsworth-woods-johnson.document.twk"
+      }
+    ]
+  },
+  "provenance": {
+    "revision": 2,
+    "creator": {
+      "type": "agent",
+      "id": "twk-kg-seed"
+    },
+    "note": "Series index for the American Alchemy KG pilot. Guest hypotheses stay asserted-in-media."
+  }
+}
