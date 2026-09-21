@@ -1,0 +1,98 @@
+{
+  "limit": 1,
+  "sources": {
+    "innermost-loop": [
+      {
+        "outcome": "skip-no-date",
+        "title": "No date in this title"
+      },
+      {
+        "outcome": "skip-same-stem",
+        "stem": "til-2026-01-01",
+        "existing": "til-2026-01-01.document.twk"
+      },
+      {
+        "outcome": "skip-different-stem",
+        "stem": "til-2026-09-02",
+        "existing": "other-name.document.twk"
+      },
+      {
+        "outcome": "write",
+        "stem": "til-2026-09-06",
+        "structure_count": 2
+      },
+      {
+        "outcome": "not-examined",
+        "title": "Welcome to September 4, 2026"
+      }
+    ],
+    "american-alchemy": [
+      {
+        "outcome": "skip-no-chapters",
+        "id": "nochapters001",
+        "title": "A clip with no times",
+        "description_length": 29,
+        "timestamp_lines": 0
+      },
+      {
+        "outcome": "skip-no-chapters",
+        "id": "onechapter001",
+        "title": "A short with one mark",
+        "description_length": 15,
+        "timestamp_lines": 1
+      },
+      {
+        "outcome": "skip-different-stem",
+        "stem": "geoffrey-drumm-2026-09-19",
+        "existing": "drumm-pyramids.document.twk",
+        "needle": "BSXdnsyCqxw"
+      },
+      {
+        "outcome": "skip-same-stem",
+        "stem": "grant-cameron-2026-09-15",
+        "existing": "grant-cameron-2026-09-15.document.twk"
+      },
+      {
+        "outcome": "write",
+        "stem": "ada-lovelace-2026-08-02",
+        "structure_count": 3
+      },
+      {
+        "outcome": "not-examined",
+        "id": "notexamined01",
+        "title": "Another longform - Grace Hopper"
+      }
+    ],
+    "cre": [
+      {
+        "outcome": "skip-same-stem",
+        "stem": "ada-lovelace-2026-08-02",
+        "existing": "ada-lovelace-2026-08-02.document.twk"
+      },
+      {
+        "outcome": "skip-chapters-external",
+        "id": "podlove-fixture-external",
+        "psc_chapter_count": 0,
+        "chapters_url": "https://cre.fm/cre901-nur-extern?chapters_format=pijson"
+      },
+      {
+        "outcome": "skip-no-chapters",
+        "id": "podlove-fixture-nochapters",
+        "psc_chapter_count": 1
+      },
+      {
+        "outcome": "skip-no-enclosure",
+        "id": "podlove-fixture-noenclosure"
+      },
+      {
+        "outcome": "write",
+        "stem": "cre904-echte-episode",
+        "structure_count": 4
+      },
+      {
+        "outcome": "not-examined",
+        "title": "CRE905 Danach"
+      }
+    ]
+  }
+}

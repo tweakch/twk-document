@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>The Innermost Loop</title>
+    <item>
+      <title>No date in this title</title>
+      <link>https://theinnermostloop.substack.com/p/no-date</link>
+      <dc:creator>Alex Wissner-Gross</dc:creator>
+      <content:encoded><![CDATA[<p>This item has no date in the title and no pubDate, so the crawl cannot name a stem.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Welcome to January 1, 2026</title>
+      <link>https://theinnermostloop.substack.com/p/new-year</link>
+      <pubDate>Thu, 01 Jan 2026 12:00:00 GMT</pubDate>
+      <dc:creator>Alex Wissner-Gross</dc:creator>
+      <content:encoded><![CDATA[<p>Already on disk under the same stem. The body is long enough that a mistaken write would still produce a section.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Welcome to September 2, 2026</title>
+      <link>https://theinnermostloop.substack.com/p/sep-2</link>
+      <pubDate>Wed, 02 Sep 2026 12:00:00 GMT</pubDate>
+      <dc:creator>Alex Wissner-Gross</dc:creator>
+      <content:encoded><![CDATA[<p>Same canonical URL as a file with a different stem. The body is long enough that a mistaken write would still produce a section.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Welcome to September 6, 2026</title>
+      <link>https://theinnermostloop.substack.com/p/sep-6</link>
+      <pubDate>Sun, 06 Sep 2026 12:00:00 GMT</pubDate>
+      <dc:creator>Alex Wissner-Gross</dc:creator>
+      <content:encoded><![CDATA[<p>Kevin Buzzard. Jared Duker Lichtman spoke with OpenAI about a fixture paragraph that is definitely long enough to count.</p> <p>May arrived. Governor Shapiro U-turned on the bill after the hearing ended yesterday morning.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Welcome to September 4, 2026</title>
+      <link>https://theinnermostloop.substack.com/p/sep-4</link>
+      <pubDate>Fri, 04 Sep 2026 12:00:00 GMT</pubDate>
+      <dc:creator>Alex Wissner-Gross</dc:creator>
+      <content:encoded><![CDATA[<p>This issue sits past the write limit, so the crawl must name it and must not open it.</p>]]></content:encoded>
+    </item>
+  </channel>
+</rss>

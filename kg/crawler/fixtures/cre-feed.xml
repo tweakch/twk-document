@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:psc="http://podlove.org/simple-chapters"
+     xmlns:podcast="https://podcastindex.org/namespace/1.0">
+  <channel>
+    <title>CRE Fixture</title>
+    <itunes:author>Tim Pritlove</itunes:author>
+
+    <!-- 1. same stem as the american-alchemy write, reached from a different source -->
+    <item>
+      <title>CRE900 Kollision</title>
+      <guid isPermaLink="false">podlove-fixture-collision</guid>
+      <link>https://cre.fm/ada-lovelace-2026-08-02</link>
+      <pubDate>Sat, 02 Aug 2026 10:00:00 +0000</pubDate>
+      <description>Eine Folge, die denselben Stamm ergibt.</description>
+      <itunes:duration>01:00:00</itunes:duration>
+      <enclosure url="https://cre.fm/file/collision.mp3" length="1" type="audio/mpeg"/>
+      <psc:chapters version="1.2">
+        <psc:chapter start="00:00:00.000" title="Intro"/>
+        <psc:chapter start="00:10:00.000" title="Mitte"/>
+        <psc:chapter start="00:50:00.000" title="Ausklang"/>
+      </psc:chapters>
+    </item>
+
+    <!-- 2. chapters exist, but only behind an external JSON we did not fetch -->
+    <item>
+      <title>CRE901 Nur extern</title>
+      <guid isPermaLink="false">podlove-fixture-external</guid>
+      <link>https://cre.fm/cre901-nur-extern</link>
+      <pubDate>Fri, 01 Aug 2026 10:00:00 +0000</pubDate>
+      <description>Kapitel liegen als JSON vor.</description>
+      <itunes:duration>00:45:00</itunes:duration>
+      <enclosure url="https://cre.fm/file/extern.mp3" length="1" type="audio/mpeg"/>
+      <podcast:chapters url="https://cre.fm/cre901-nur-extern?chapters_format=pijson" type="application/json+chapters"/>
+    </item>
+
+    <!-- 3. genuinely no chapter list anywhere -->
+    <item>
+      <title>CRE902 Gar keine Kapitel</title>
+      <guid isPermaLink="false">podlove-fixture-nochapters</guid>
+      <link>https://cre.fm/cre902-gar-keine-kapitel</link>
+      <pubDate>Thu, 31 Jul 2026 10:00:00 +0000</pubDate>
+      <description>Keine Kapitel.</description>
+      <itunes:duration>00:20:00</itunes:duration>
+      <enclosure url="https://cre.fm/file/keine.mp3" length="1" type="audio/mpeg"/>
+      <psc:chapters version="1.2">
+        <psc:chapter start="00:00:00.000" title="Intro"/>
+      </psc:chapters>
+    </item>
+
+    <!-- 4. no audio artifact at all -->
+    <item>
+      <title>CRE903 Ohne Datei</title>
+      <guid isPermaLink="false">podlove-fixture-noenclosure</guid>
+      <link>https://cre.fm/cre903-ohne-datei</link>
+      <pubDate>Wed, 30 Jul 2026 10:00:00 +0000</pubDate>
+      <description>Ankuendigung ohne Audio.</description>
+      <psc:chapters version="1.2">
+        <psc:chapter start="00:00:00.000" title="Intro"/>
+        <psc:chapter start="00:05:00.000" title="Mitte"/>
+        <psc:chapter start="00:09:00.000" title="Ende"/>
+      </psc:chapters>
+    </item>
+
+    <!-- 5. the write: fractional marks, duration closes the last chapter -->
+    <item>
+      <title>CRE904 Echte Episode</title>
+      <guid isPermaLink="false">podlove-fixture-write</guid>
+      <link>https://cre.fm/cre904-echte-episode</link>
+      <pubDate>Tue, 29 Jul 2026 10:00:00 +0000</pubDate>
+      <description>Tim spricht mit Ada Lovelace ueber die Analytical Engine in London.</description>
+      <itunes:duration>01:30:00</itunes:duration>
+      <enclosure url="https://cre.fm/file/echte.mp3" length="1" type="audio/mpeg"/>
+      <psc:chapters version="1.2">
+        <psc:chapter start="00:00:00.000" title="Intro"/>
+        <psc:chapter start="00:01:29.342" title="Einfuehrung"/>
+        <psc:chapter start="00:12:00" title="Hauptteil"/>
+        <psc:chapter start="01:00:00.500" title="Ausklang"/>
+      </psc:chapters>
+    </item>
+
+    <!-- 6. past the write cap -->
+    <item>
+      <title>CRE905 Danach</title>
+      <guid isPermaLink="false">podlove-fixture-tail</guid>
+      <link>https://cre.fm/cre905-danach</link>
+      <pubDate>Mon, 28 Jul 2026 10:00:00 +0000</pubDate>
+      <description>Nach dem Limit.</description>
+      <itunes:duration>00:30:00</itunes:duration>
+      <enclosure url="https://cre.fm/file/danach.mp3" length="1" type="audio/mpeg"/>
+      <psc:chapters version="1.2">
+        <psc:chapter start="00:00:00.000" title="Intro"/>
+        <psc:chapter start="00:05:00.000" title="Mitte"/>
+        <psc:chapter start="00:25:00.000" title="Ende"/>
+      </psc:chapters>
+    </item>
+  </channel>
+</rss>

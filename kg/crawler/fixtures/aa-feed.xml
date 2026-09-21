@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:yt="http://www.youtube.com/xml/schemas/2015"
+      xmlns:media="http://search.yahoo.com/mrss/">
+  <entry>
+    <yt:videoId>nochapters001</yt:videoId>
+    <title>A clip with no times</title>
+    <published>2026-08-01T00:00:00+00:00</published>
+    <media:group><media:description>Just a teaser. No times here.</media:description></media:group>
+  </entry>
+  <entry>
+    <yt:videoId>onechapter001</yt:videoId>
+    <title>A short with one mark</title>
+    <published>2026-08-01T00:00:00+00:00</published>
+    <media:group><media:description>0:12 Intro only</media:description></media:group>
+  </entry>
+  <entry>
+    <yt:videoId>BSXdnsyCqxw</yt:videoId>
+    <title>Ammonia and stone - Geoffrey Drumm</title>
+    <published>2026-09-19T00:00:00+00:00</published>
+    <media:group><media:description>0:00 Opening
+1:23 Middle of the thing
+12:01:02 Closing argument</media:description></media:group>
+  </entry>
+  <entry>
+    <yt:videoId>grantcameron01</yt:videoId>
+    <title>Long conversation - Grant Cameron</title>
+    <published>2026-09-15T00:00:00+00:00</published>
+    <media:group><media:description>0:00 Opening
+1:23 Middle of the thing
+12:01:02 Closing argument</media:description></media:group>
+  </entry>
+  <entry>
+    <yt:videoId>adalovelace01</yt:videoId>
+    <title>A public longform - Ada Lovelace</title>
+    <published>2026-08-02T00:00:00+00:00</published>
+    <media:group><media:description>0:00 Opening
+1:23 Middle of the thing
+12:01:02 Closing argument</media:description></media:group>
+  </entry>
+  <entry>
+    <yt:videoId>notexamined01</yt:videoId>
+    <title>Another longform - Grace Hopper</title>
+    <published>2026-08-03T00:00:00+00:00</published>
+    <media:group><media:description>0:00 Opening
+1:23 Middle of the thing
+12:01:02 Closing argument</media:description></media:group>
+  </entry>
+</feed>
