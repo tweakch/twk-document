@@ -5,6 +5,7 @@
   "type": "module",
   "description": "TWK 0.2 temporal knowledge player",
   "scripts": {
+    "postinstall": "mkdir -p public/data/shards && cp -f ../examples/*.twk public/data/ && cp -f ../examples/shards/*.twk public/data/shards/",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"

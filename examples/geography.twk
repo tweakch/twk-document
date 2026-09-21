@@ -1,0 +1,242 @@
+{
+  "twk": "0.2",
+  "id": "twk:example/outback-001",
+  "kind": "document",
+  "title": "Walking the West MacDonnells",
+  "language": "en",
+  "clock": {
+    "kind": "media-time"
+  },
+  "media": {
+    "uri": "https://example.org/outback.mp3",
+    "type": "audio",
+    "mime": "audio/mpeg",
+    "duration": 7423.42,
+    "identity": {
+      "type": "sha256",
+      "value": "abc123"
+    },
+    "identities": [
+      { "type": "sha256", "value": "abc123" },
+      { "type": "podcast-guid", "value": "9b2e0c1a-4f33-4a91-9d0e-outback001" }
+    ]
+  },
+  "structure": {
+    "chapters": [
+      {
+        "id": "chapter:leaving-alice",
+        "title": "Leaving Alice Springs",
+        "start": 700.0,
+        "end": 900.0
+      },
+      {
+        "id": "chapter:sonder-to-hermannsburg",
+        "title": "Mount Sonder to Hermannsburg",
+        "start": 900.0,
+        "end": 1400.0
+      }
+    ]
+  },
+  "speakers": [
+    {
+      "id": "speaker:host",
+      "name": "Alex",
+      "role": "host",
+      "entity": "entity:alex"
+    },
+    {
+      "id": "speaker:ranger",
+      "name": "John Smith",
+      "role": "guest",
+      "entity": "entity:john-smith"
+    }
+  ],
+  "layers": [
+    { "id": "layer:extracted", "role": "extracted", "agent": "twk-auto-enricher" },
+    { "id": "layer:editorial", "role": "editorial", "title": "Producer pass" }
+  ],
+  "transcript": {
+    "language": "en",
+    "segments": [
+      {
+        "id": "seg-001",
+        "start": 731.42,
+        "end": 735.81,
+        "speaker": "speaker:ranger",
+        "text": "We travelled from Alice Springs to Hermannsburg."
+      },
+      {
+        "id": "seg-002",
+        "start": 742.10,
+        "end": 748.20,
+        "speaker": "speaker:ranger",
+        "text": "Mount Sonder sits at about thirteen eighty metres."
+      }
+    ]
+  },
+  "entities": [
+    {
+      "id": "entity:alex",
+      "type": "person",
+      "name": "Alex"
+    },
+    {
+      "id": "entity:john-smith",
+      "type": "person",
+      "name": "John Smith",
+      "description": "Australian park ranger.",
+      "aliases": ["the ranger"]
+    },
+    {
+      "id": "entity:alice-springs",
+      "type": "place",
+      "name": "Alice Springs",
+      "description": "A town in the Northern Territory of Australia.",
+      "geo": { "lat": -23.698, "lon": 133.88 },
+      "external": [
+        { "system": "wikidata", "id": "Q3235" },
+        { "system": "geonames", "id": "2077895" }
+      ],
+      "sources": ["source:wikidata-alice"],
+      "assets": ["asset:alice-springs-photo"]
+    },
+    {
+      "id": "entity:hermannsburg",
+      "type": "place",
+      "name": "Hermannsburg",
+      "aliases": ["Ntaria"],
+      "geo": { "lat": -23.945, "lon": 132.776 },
+      "external": [{ "system": "wikidata", "id": "Q1616174" }]
+    },
+    {
+      "id": "entity:mount-sonder",
+      "type": "place",
+      "name": "Mount Sonder",
+      "aliases": ["Rwetyepme"],
+      "geo": { "lat": -23.585, "lon": 132.811, "elevation": 1380, "unit": "m" },
+      "external": [{ "system": "wikidata", "id": "Q1950632" }]
+    },
+    {
+      "id": "entity:west-macdonnell",
+      "type": "place",
+      "name": "West MacDonnell Ranges",
+      "geo": { "lat": -23.7, "lon": 132.9 }
+    }
+  ],
+  "timeline": [
+    {
+      "id": "int-001",
+      "start": 731.42,
+      "end": 735.81,
+      "events": [
+        {
+          "type": "mention",
+          "entity": "entity:alice-springs",
+          "quote": "Alice Springs",
+          "evidence": ["seg-001"],
+          "confidence": 0.97,
+          "salience": 0.86,
+          "speaker": "speaker:ranger"
+        },
+        {
+          "type": "mention",
+          "entity": "entity:hermannsburg",
+          "quote": "Hermannsburg",
+          "evidence": ["seg-001"],
+          "confidence": 0.94,
+          "salience": 0.9,
+          "speaker": "speaker:ranger"
+        },
+        {
+          "type": "discussion",
+          "relation": "relation:journey-001",
+          "confidence": 0.81,
+          "salience": 1.0
+        }
+      ]
+    },
+    {
+      "id": "int-002",
+      "start": 742.1,
+      "end": 748.2,
+      "events": [
+        {
+          "type": "mention",
+          "entity": "entity:mount-sonder",
+          "quote": "Mount Sonder",
+          "evidence": ["seg-002"],
+          "confidence": 0.96,
+          "salience": 0.88
+        },
+        {
+          "type": "claim",
+          "claim": "claim:sonder-elevation",
+          "confidence": 0.72,
+          "salience": 0.55
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "relation:journey-001",
+      "type": "travel",
+      "from": "entity:alice-springs",
+      "to": "entity:hermannsburg",
+      "via": ["entity:west-macdonnell", "entity:mount-sonder"],
+      "start": 731.42,
+      "end": 812.2,
+      "participants": ["entity:john-smith"],
+      "confidence": 0.81
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim:sonder-elevation",
+      "kind": "asserted-in-media",
+      "subject": "entity:mount-sonder",
+      "predicate": "elevation",
+      "object": { "value": 1380, "unit": "m" },
+      "start": 742.1,
+      "end": 748.2,
+      "quote": "Mount Sonder sits at about thirteen eighty metres.",
+      "confidence": 0.72,
+      "sources": ["source:wikidata-sonder"]
+    }
+  ],
+  "sources": [
+    {
+      "id": "source:wikidata-alice",
+      "type": "website",
+      "uri": "https://www.wikidata.org/wiki/Q3235",
+      "title": "Alice Springs",
+      "publisher": "Wikidata"
+    },
+    {
+      "id": "source:wikidata-sonder",
+      "type": "website",
+      "uri": "https://www.wikidata.org/wiki/Q1950632",
+      "title": "Mount Sonder",
+      "publisher": "Wikidata"
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset:alice-springs-photo",
+      "type": "image",
+      "role": "hero",
+      "uri": "https://example.org/assets/alice-springs.jpg",
+      "mime": "image/jpeg",
+      "entity": "entity:alice-springs",
+      "alt": "Aerial view of Alice Springs",
+      "source": "source:wikidata-alice"
+    }
+  ],
+  "provenance": {
+    "revision": 17,
+    "contentHash": "sha256:def456",
+    "created": "2026-09-21T20:00:00Z",
+    "modified": "2026-09-21T22:31:00Z",
+    "creator": { "type": "agent", "id": "twk-auto-enricher" }
+  }
+}
