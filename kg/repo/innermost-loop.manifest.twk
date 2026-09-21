@@ -10,12 +10,20 @@
   },
   "media": {
     "uri": "https://theinnermostloop.substack.com/",
-    "type": "text",
+    "type": "mixed",
     "mime": "text/html",
     "identities": [
       {
         "type": "url",
         "value": "https://theinnermostloop.substack.com/"
+      },
+      {
+        "type": "url",
+        "value": "https://theinnermostloop.substack.com/podcast"
+      },
+      {
+        "type": "spotify-show",
+        "value": "1thtZk5vHTXbtDHezPT7tl"
       }
     ]
   },
@@ -28,15 +36,23 @@
       {
         "id": "twk:til/issue/2026-09-13",
         "uri": "./til-2026-09-13.document.twk"
+      },
+      {
+        "id": "twk:til/episode/2026-09-02-alpha-centauri",
+        "uri": "./til-episode-alpha-centauri.document.twk"
+      },
+      {
+        "id": "twk:til/episode/2026-08-27-redwood",
+        "uri": "./til-episode-redwood-chip.document.twk"
       }
     ]
   },
   "provenance": {
-    "revision": 1,
+    "revision": 2,
     "creator": {
       "type": "agent",
       "id": "twk-kg-seed"
     },
-    "note": "Series index for Innermost Loop text-locator documents."
+    "note": "Series index: daily Welcome-to-DATE issues plus named episode essays that also ship as podcast voiceovers on the same Substack / Spotify show."
   }
 }

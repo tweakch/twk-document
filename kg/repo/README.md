@@ -30,4 +30,8 @@ Text-locator documents. Newsletter attributions stay `asserted-in-media`.
 | `til-2026-09-20.dictionary.twk` | dictionary | same |
 | `til-2026-09-13.document.twk` | document | Substack 2026-09-13 |
 | `til-2026-09-13.dictionary.twk` | dictionary | same |
-| `innermost-loop.manifest.twk` | manifest | series index |
+| `til-episode-alpha-centauri.document.twk` | document | named episode + 5:08 voiceover, 2026-09-02 |
+| `til-episode-alpha-centauri.dictionary.twk` | dictionary | same |
+| `til-episode-redwood-chip.document.twk` | document | named episode + 5:37 voiceover, 2026-08-27 |
+| `til-episode-redwood-chip.dictionary.twk` | dictionary | same |
+| `innermost-loop.manifest.twk` | manifest | series index (issues + episodes + Spotify show `1thtZk5vHTXbtDHezPT7tl`) |
