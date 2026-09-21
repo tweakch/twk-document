@@ -4,16 +4,25 @@ Public-source, Wikidata-aligned graph intended to feed TWK layers for *American 
 
 Guest hypotheses stay `asserted-in-media`. Writing them into a sidecar does not promote them to facts.
 
+## Run the server
+
+```bash
+cd kg/server
+python3 server.py
+```
+
+Open http://127.0.0.1:8765/admin
+
+Working store: `kg/repo/`. Pilot snapshot: `kg/american-alchemy/`.
+
 ## Pilot
 
 Episode: Drumm / pyramids. YouTube id `BSXdnsyCqxw`.
 
-Local snapshot files (also under the project `artifacts/twk-kg/` tree):
-
 - `american-alchemy/drumm-pyramids.dictionary.twk`
 - `american-alchemy/drumm-pyramids.document.twk`
-- `TWK-KG-Implementation-Plan.md`
-- `server/` — small Python admin + `validateLite` against the 0.2 schema
+- `repo/` — same files, what the server lists on boot
+- `server/` — stdlib HTTP + admin desk + `twk_lib.py`
 
 ## Catalog rule of thumb
 

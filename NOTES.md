@@ -1,8 +1,7 @@
-Large binary/source snapshots still in the local working tree (`artifacts/twk-0.2`, `artifacts/twk-player/src`, `artifacts/twk-kg`) will be committed in follow-up pushes:
+Remaining follow-up from the first import:
 
-- `schema/twk-0.2.schema.json`
-- `spec/TWK-0.2.md` (full draft converted from the Word spec)
-- `player/src/engine.js`
-- `player/src/main.js`
-- `kg/american-alchemy/*.twk`
-- `kg/server/*`
+- `schema/twk-0.2.schema.json` (also copied beside the KG server)
+- `kg/american-alchemy/*.twk` and `kg/repo/*.twk` pilot seeds
+- `kg/server/static/admin.html`
+
+Server code is on main (`kg/server/server.py`, `kg/server/twk_lib.py`).
