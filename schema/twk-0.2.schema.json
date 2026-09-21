@@ -1,0 +1,394 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twk.dev/schema/twk-0.2.schema.json",
+  "title": "TWK 0.2 Temporal Knowledge Document",
+  "description": "A portable, immutable, addressable knowledge layer for a media resource.",
+  "type": "object",
+  "required": ["twk", "id", "media"],
+  "additionalProperties": true,
+  "properties": {
+    "twk": {
+      "type": "string",
+      "pattern": "^0\\.2(\\..+)?$",
+      "description": "Format version. 0.2 clients MUST accept 0.2 and 0.2.x."
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable document identifier, preferably a URI or twk: authority path."
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["document", "manifest", "shard", "dictionary"],
+      "default": "document"
+    },
+    "title": { "type": "string" },
+    "language": { "type": "string", "description": "BCP-47 default language for the document." },
+    "media": { "$ref": "#/$defs/media" },
+    "clock": { "$ref": "#/$defs/clock" },
+    "structure": { "$ref": "#/$defs/structure" },
+    "speakers": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/speaker" }
+    },
+    "transcript": { "$ref": "#/$defs/transcript" },
+    "entities": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entity" }
+    },
+    "timeline": {
+      "type": "array",
+      "description": "MUST be sorted by span start ascending.",
+      "items": { "$ref": "#/$defs/interval" }
+    },
+    "relations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/relation" }
+    },
+    "claims": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/claim" }
+    },
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/source" }
+    },
+    "assets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/asset" }
+    },
+    "layers": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/layer" }
+    },
+    "composition": { "$ref": "#/$defs/composition" },
+    "provenance": { "$ref": "#/$defs/provenance" },
+    "integrity": { "$ref": "#/$defs/integrity" },
+    "x": {
+      "type": "object",
+      "description": "Extension bag. Clients MUST ignore unknown keys inside x."
+    }
+  },
+  "$defs": {
+    "seconds": { "type": "number", "minimum": 0 },
+    "unitInterval": { "type": "number", "minimum": 0, "maximum": 1 },
+    "position": {
+      "description": "A point on the media address space. A bare number means seconds from media origin.",
+      "oneOf": [
+        { "$ref": "#/$defs/seconds" },
+        {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "t": { "$ref": "#/$defs/seconds" },
+            "locator": { "type": "string" },
+            "scheme": {
+              "type": "string",
+              "enum": ["seconds", "percent", "page", "char", "epubcfi", "xpath", "anchor", "custom"]
+            },
+            "page": { "type": "number" },
+            "offset": { "type": "number" },
+            "frac": { "$ref": "#/$defs/unitInterval" }
+          }
+        }
+      ]
+    },
+    "span": {
+      "type": "object",
+      "required": ["start"],
+      "additionalProperties": true,
+      "properties": {
+        "start": { "$ref": "#/$defs/position" },
+        "end": { "$ref": "#/$defs/position" }
+      }
+    },
+    "clock": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "kind": { "type": "string", "enum": ["media-time", "text-locator", "mixed"] },
+        "origin": { "type": "string" },
+        "locatorScheme": { "type": "string" }
+      }
+    },
+    "media": {
+      "type": "object",
+      "required": ["uri"],
+      "additionalProperties": true,
+      "properties": {
+        "uri": { "type": "string" },
+        "type": { "type": "string", "enum": ["audio", "video", "text", "mixed"] },
+        "mime": { "type": "string" },
+        "duration": { "$ref": "#/$defs/seconds" },
+        "extent": {
+          "type": "object",
+          "properties": {
+            "pages": { "type": "number" },
+            "chars": { "type": "number" },
+            "words": { "type": "number" }
+          }
+        },
+        "identity": { "$ref": "#/$defs/identity" },
+        "identities": { "type": "array", "items": { "$ref": "#/$defs/identity" } },
+        "locatorScheme": { "type": "string" }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "required": ["type", "value"],
+      "properties": { "type": { "type": "string" }, "value": { "type": "string" } }
+    },
+    "structure": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "chapters": { "type": "array", "items": { "$ref": "#/$defs/chapter" } }
+      }
+    },
+    "chapter": {
+      "type": "object",
+      "required": ["id", "start"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "start": { "$ref": "#/$defs/position" },
+        "end": { "$ref": "#/$defs/position" },
+        "toc": { "type": "boolean", "default": true },
+        "image": { "type": "string" }
+      }
+    },
+    "speaker": {
+      "type": "object",
+      "required": ["id"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "entity": { "type": "string" }
+      }
+    },
+    "transcript": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "language": { "type": "string" },
+        "uri": { "type": "string" },
+        "mime": { "type": "string" },
+        "segments": { "type": "array", "items": { "$ref": "#/$defs/segment" } }
+      }
+    },
+    "segment": {
+      "type": "object",
+      "required": ["id", "start", "text"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "start": { "$ref": "#/$defs/position" },
+        "end": { "$ref": "#/$defs/position" },
+        "text": { "type": "string" },
+        "speaker": { "type": "string" },
+        "words": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["text", "start"],
+            "properties": {
+              "text": { "type": "string" },
+              "start": { "$ref": "#/$defs/position" },
+              "end": { "$ref": "#/$defs/position" }
+            }
+          }
+        }
+      }
+    },
+    "entity": {
+      "type": "object",
+      "required": ["id", "type", "name"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "name": { "type": "string" },
+        "aliases": { "type": "array", "items": { "type": "string" } },
+        "description": { "type": "string" },
+        "geo": {
+          "type": "object",
+          "properties": {
+            "lat": { "type": "number" },
+            "lon": { "type": "number" },
+            "elevation": { "type": "number" },
+            "unit": { "type": "string" }
+          }
+        },
+        "external": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["system", "id"],
+            "properties": {
+              "system": { "type": "string" },
+              "id": { "type": "string" },
+              "uri": { "type": "string" }
+            }
+          }
+        },
+        "assets": { "type": "array", "items": { "type": "string" } },
+        "sources": { "type": "array", "items": { "type": "string" } },
+        "layer": { "type": "string" }
+      }
+    },
+    "interval": {
+      "type": "object",
+      "required": ["start", "events"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "start": { "$ref": "#/$defs/position" },
+        "end": { "$ref": "#/$defs/position" },
+        "events": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/event" } },
+        "layer": { "type": "string" }
+      }
+    },
+    "event": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": true,
+      "properties": {
+        "type": { "type": "string" },
+        "entity": { "type": "string" },
+        "relation": { "type": "string" },
+        "claim": { "type": "string" },
+        "speaker": { "type": "string" },
+        "quote": { "type": "string" },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "confidence": { "$ref": "#/$defs/unitInterval" },
+        "salience": { "$ref": "#/$defs/unitInterval" },
+        "layer": { "type": "string" }
+      }
+    },
+    "relation": {
+      "type": "object",
+      "required": ["id", "type"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "via": { "type": "array", "items": { "type": "string" } },
+        "start": { "$ref": "#/$defs/position" },
+        "end": { "$ref": "#/$defs/position" },
+        "participants": { "type": "array", "items": { "type": "string" } },
+        "confidence": { "$ref": "#/$defs/unitInterval" },
+        "sources": { "type": "array", "items": { "type": "string" } },
+        "layer": { "type": "string" }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "required": ["id", "subject", "predicate"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "type": "string", "enum": ["asserted-in-media", "external-fact", "disputed"] },
+        "subject": { "type": "string" },
+        "predicate": { "type": "string" },
+        "object": {},
+        "start": { "$ref": "#/$defs/position" },
+        "end": { "$ref": "#/$defs/position" },
+        "quote": { "type": "string" },
+        "confidence": { "$ref": "#/$defs/unitInterval" },
+        "sources": { "type": "array", "items": { "type": "string" } },
+        "layer": { "type": "string" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["id"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "uri": { "type": "string" },
+        "title": { "type": "string" },
+        "publisher": { "type": "string" },
+        "retrieved": { "type": "string" }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "required": ["id", "type"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "role": { "type": "string" },
+        "uri": { "type": "string" },
+        "mime": { "type": "string" },
+        "entity": { "type": "string" },
+        "alt": { "type": "string" },
+        "source": { "type": "string" }
+      }
+    },
+    "layer": {
+      "type": "object",
+      "required": ["id"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "role": { "type": "string", "enum": ["publisher", "community", "extracted", "editorial", "custom"] },
+        "title": { "type": "string" },
+        "agent": { "type": "string" }
+      }
+    },
+    "composition": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "dictionary": {
+          "type": "object",
+          "properties": {
+            "uri": { "type": "string" },
+            "integrity": { "$ref": "#/$defs/integrity" }
+          }
+        },
+        "shards": { "type": "array", "items": { "$ref": "#/$defs/shardRef" } },
+        "windowHintSeconds": { "type": "number" }
+      }
+    },
+    "shardRef": {
+      "type": "object",
+      "required": ["uri", "start"],
+      "properties": {
+        "id": { "type": "string" },
+        "uri": { "type": "string" },
+        "start": { "$ref": "#/$defs/position" },
+        "end": { "$ref": "#/$defs/position" },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "integrity": { "$ref": "#/$defs/integrity" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "revision": {},
+        "parent": { "type": "string" },
+        "contentHash": { "type": "string" },
+        "created": { "type": "string" },
+        "modified": { "type": "string" },
+        "creator": {
+          "type": "object",
+          "properties": { "type": { "type": "string" }, "id": { "type": "string" } }
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "required": ["type", "value"],
+      "properties": { "type": { "type": "string" }, "value": { "type": "string" } }
+    }
+  }
+}
