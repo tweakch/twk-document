@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TWK Player</title>
+</head>
+<body>
+  <header>
+    <div class="mark">TWK <span>0.2</span></div>
+    <div class="doc-meta">
+      <h1 id="title">No document</h1>
+      <p id="sub">Load a .twk sidecar — document, manifest, or shard</p>
+    </div>
+    <div class="toolbar">
+      <select id="preset">
+        <option value="/data/geography.twk">geography (document)</option>
+        <option value="/data/manifest.twk">outback (manifest + shard)</option>
+        <option value="/data/ebook-chapter.twk">ebook chapter (text clock)</option>
+        <option value="/data/minimal.twk">minimal</option>
+        <option value="/data/dictionary.twk">dictionary only</option>
+      </select>
+      <label class="file-btn">Open .twk<input id="file" type="file" accept=".twk,application/json" /></label>
+      <button id="play" class="primary">Play clock</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="col">
+      <p class="kicker">Now / transcript</p>
+      <div id="now-seg" class="empty">contextAt(t) is empty until something covers this instant.</div>
+      <div id="transcript" class="transcript"></div>
+    </section>
+    <section class="col">
+      <p class="kicker">Context layer</p>
+      <div id="map" hidden></div>
+      <div id="context"></div>
+    </section>
+    <section class="col rail">
+      <p class="kicker">Structure</p>
+      <div id="chapters"></div>
+      <p class="kicker">Entities</p>
+      <div id="entity-list"></div>
+      <p class="kicker">Claims</p>
+      <div id="claim-list"></div>
+      <p class="kicker">Layers / provenance</p>
+      <div id="prov"></div>
+    </section>
+  </main>
+
+  <footer class="transport">
+    <div class="transport-row">
+      <span class="time" id="t-cur">0:00.0</span>
+      <input id="scrub" type="range" min="0" max="1000" step="0.01" value="731.42" />
+      <span class="time" id="t-end">0:00.0</span>
+    </div>
+    <div class="chapters-track" id="ch-track"></div>
+    <div class="status" id="status">Idle</div>
+    <audio id="audio" preload="metadata"></audio>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

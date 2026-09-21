@@ -1,0 +1,91 @@
+{
+  "twk": "0.2",
+  "id": "twk:example/larapinta-book/ch-04",
+  "kind": "document",
+  "title": "Chapter 4 — The western end",
+  "language": "en",
+  "clock": {
+    "kind": "text-locator",
+    "locatorScheme": "epubcfi"
+  },
+  "media": {
+    "uri": "https://example.org/books/larapinta.epub",
+    "type": "text",
+    "mime": "application/epub+zip",
+    "locatorScheme": "epubcfi",
+    "extent": { "pages": 286, "chars": 412000 },
+    "identities": [
+      { "type": "isbn", "value": "978-1-56619-909-4" },
+      { "type": "sha256", "value": "b00khash" }
+    ]
+  },
+  "structure": {
+    "chapters": [
+      {
+        "id": "chapter:ch-04",
+        "title": "The western end",
+        "start": {
+          "scheme": "epubcfi",
+          "locator": "epubcfi(/6/14!/4/2)",
+          "page": 91,
+          "frac": 0.32
+        },
+        "end": {
+          "scheme": "epubcfi",
+          "locator": "epubcfi(/6/16!/4/2)",
+          "page": 118,
+          "frac": 0.41
+        }
+      }
+    ]
+  },
+  "entities": [
+    {
+      "id": "entity:mount-sonder",
+      "type": "place",
+      "name": "Mount Sonder",
+      "geo": { "lat": -23.585, "lon": 132.811, "elevation": 1380, "unit": "m" }
+    },
+    {
+      "id": "entity:redbank-gorge",
+      "type": "place",
+      "name": "Redbank Gorge",
+      "geo": { "lat": -23.579, "lon": 132.73 }
+    }
+  ],
+  "timeline": [
+    {
+      "start": {
+        "scheme": "epubcfi",
+        "locator": "epubcfi(/6/14!/4/2/8)",
+        "page": 94
+      },
+      "end": {
+        "scheme": "epubcfi",
+        "locator": "epubcfi(/6/14!/4/2/14)",
+        "page": 95
+      },
+      "events": [
+        {
+          "type": "mention",
+          "entity": "entity:mount-sonder",
+          "quote": "Rwetyepme standing over the western trail",
+          "salience": 0.92,
+          "confidence": 0.99
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "relation:descent-001",
+      "type": "travel",
+      "from": "entity:mount-sonder",
+      "to": "entity:redbank-gorge"
+    }
+  ],
+  "provenance": {
+    "revision": 3,
+    "creator": { "type": "agent", "id": "twk-book-enricher" }
+  }
+}
