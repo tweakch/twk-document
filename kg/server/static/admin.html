@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TWK KG desk</title>
+  <style>
+    :root {
+      --ink: #16130f; --paper: #f4ead4; --muted: #7a6f5b; --line: #3b342a;
+      --accent: #c45c26; --ok: #2f6f6a; --bad: #8a3030; --panel: #221e18;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: var(--ink); color: var(--paper); font: 14px/1.4 "Source Sans 3", system-ui, sans-serif; }
+    body { display: grid; grid-template-columns: 240px 1fr 320px; grid-template-rows: 48px 1fr; }
+    header { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; padding: 0 14px; border-bottom: 1px solid var(--line); }
+    header b { letter-spacing: .08em; }
+    header span { color: var(--muted); font-size: 12px; }
+    aside, .desk, .rail { overflow: auto; min-height: 0; }
+    aside { border-right: 1px solid var(--line); padding: 10px; }
+    .rail { border-left: 1px solid var(--line); padding: 10px; }
+    .desk { padding: 12px 16px 40px; }
+    .file { padding: 6px 8px; border-radius: 4px; cursor: pointer; margin-bottom: 4px; border: 1px solid transparent; }
+    .file:hover { background: var(--panel); }
+    .file.on { border-color: var(--accent); background: var(--panel); }
+    .file small { display: block; color: var(--muted); font-size: 11px; }
+    button, select, input, textarea {
+      background: #2a251e; color: var(--paper); border: 1px solid #4a4032;
+      border-radius: 4px; padding: 5px 8px; font: inherit;
+    }
+    button.primary { background: var(--accent); border-color: var(--accent); }
+    .row { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+    .kicker { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 14px 0 6px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { text-align: left; padding: 4px 6px; border-bottom: 1px solid #2e2922; vertical-align: top; }
+    tr { cursor: pointer; }
+    tr:hover { background: #2a251e; }
+    textarea.json { width: 100%; min-height: 280px; font: 12px/1.45 ui-monospace, monospace; white-space: pre; tab-size: 2; }
+    .pill { display: inline-block; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; border: 1px solid #5a4e3c; padding: 1px 6px; border-radius: 99px; }
+    .pill.aim { color: #e0a36a; }
+    .pill.ef { color: #7ec9c2; }
+    .pill.disp { color: #e08a8a; }
+    .ok { color: #8fd0c8; }
+    .bad { color: #e08a8a; }
+    .warn { color: #e0a36a; }
+    .grid { display: grid; grid-template-columns: 120px 1fr; gap: 6px 8px; align-items: center; }
+    .tabs button.on { border-color: var(--accent); }
+    #ctx, #graph { font-size: 12px; }
+    .node { padding: 3px 0; border-bottom: 1px dotted #3a3328; }
+  </style>
+</head>
+<body>
+  <header>
+    <b>TWK KG</b>
+    <span>0.2 authoring desk · American Alchemy pilot</span>
+    <span id="status" style="margin-left:auto"></span>
+  </header>
+  <aside>
+    <div class="row">
+      <button class="primary" id="btn-new">New</button>
+      <button id="btn-reload">Reload</button>
+    </div>
+    <div id="files"></div>
+  </aside>
+  <section class="desk">
+    <div class="row tabs">
+      <button data-tab="meta" class="on">Meta</button>
+      <button data-tab="entities">Entities</button>
+      <button data-tab="claims">Claims</button>
+      <button data-tab="relations">Relations</button>
+      <button data-tab="timeline">Timeline</button>
+      <button data-tab="json">Raw JSON</button>
+    </div>
+    <div class="row">
+      <button class="primary" id="btn-save">Save</button>
+      <button id="btn-validate">Validate</button>
+      <button id="btn-delete">Delete file</button>
+      <span id="report"></span>
+    </div>
+    <div id="tab-meta">
+      <div class="grid">
+        <label>file</label><input id="f-file" />
+        <label>id</label><input id="f-id" />
+        <label>kind</label>
+        <select id="f-kind">
+          <option>document</option><option>dictionary</option><option>manifest</option><option>shard</option>
+        </select>
+        <label>title</label><input id="f-title" />
+        <label>media.uri</label><input id="f-uri" />
+        <label>duration</label><input id="f-dur" type="number" />
+      </div>
+      <p class="kicker">Chapters</p>
+      <div id="chapters"></div>
+    </div>
+    <div id="tab-entities" hidden></div>
+    <div id="tab-claims" hidden></div>
+    <div id="tab-relations" hidden></div>
+    <div id="tab-timeline" hidden></div>
+    <div id="tab-json" hidden>
+      <textarea class="json" id="raw" spellcheck="false"></textarea>
+    </div>
+    <p class="kicker">Add / upsert item</p>
+    <div class="grid">
+      <label>collection</label>
+      <select id="p-col">
+        <option>entities</option><option>claims</option><option>relations</option>
+        <option>sources</option><option>speakers</option><option>timeline</option>
+      </select>
+      <label>item JSON</label>
+      <textarea id="p-item" rows="7" class="json">{
+  "id": "",
+  "type": "person",
+  "name": ""
+}</textarea>
+    </div>
+    <div class="row"><button id="btn-patch">Upsert into file</button></div>
+  </section>
+  <aside class="rail">
+    <p class="kicker">contextAt</p>
+    <div class="row">
+      <input id="t" type="number" value="803" step="0.1" style="width:100px" />
+      <button id="btn-ctx">Probe</button>
+    </div>
+    <div id="ctx"></div>
+    <p class="kicker">Graph</p>
+    <div id="graph"></div>
+  </aside>
+<script>
+const $ = (id) => document.getElementById(id);
+let currentFile = null;
+let currentDoc = null;
+function pill(kind) {
+  const c = kind === "external-fact" ? "ef" : kind === "disputed" ? "disp" : "aim";
+  return `<span class="pill ${c}">${kind || ""}</span>`;
+}
+async function api(path, opts) {
+  const res = await fetch(path, Object.assign({ headers: { "Content-Type": "application/json" } }, opts));
+  const text = await res.text();
+  try { return JSON.parse(text); } catch { return { error: text }; }
+}
+async function listFiles() {
+  const rows = await api("/api/docs");
+  $("files").innerHTML = rows.map(r => `
+    <div class="file ${r.file===currentFile?"on":""}" data-file="${r.file}">
+      <strong>${r.title || r.file}</strong>
+      <small>${r.kind} · e${r.entities||0} c${r.claims||0} · ${r.file}</small>
+    </div>`).join("");
+}
+function bindMeta() {
+  const d = currentDoc || {};
+  $("f-file").value = currentFile || "";
+  $("f-id").value = d.id || "";
+  $("f-kind").value = d.kind || "document";
+  $("f-title").value = d.title || "";
+  $("f-uri").value = (d.media && d.media.uri) || "";
+  $("f-dur").value = (d.media && d.media.duration) || "";
+  const ch = ((d.structure||{}).chapters)||[];
+  $("chapters").innerHTML = `<table><tr><th>id</th><th>title</th><th>start</th><th>end</th></tr>${
+    ch.map(c => `<tr><td>${c.id}</td><td>${c.title||""}</td><td>${c.start}</td><td>${c.end??""}</td></tr>`).join("")
+  }</table>`;
+}
+function table(arr, cols) {
+  if (!arr || !arr.length) return `<p style="color:var(--muted)">none</p>`;
+  const head = cols.map(c => `<th>${c}</th>`).join("");
+  const body = arr.map(item => `<tr>${cols.map(c => `<td>${escapeHtml(fmt(item[c]))}</td>`).join("")}</tr>`).join("");
+  return `<table><tr>${head}</tr>${body}</table>`;
+}
+function fmt(v) {
+  if (v == null) return "";
+  if (typeof v === "object") return JSON.stringify(v);
+  return String(v);
+}
+function escapeHtml(s) {
+  return String(s).replace(/[&<>]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[ch]));
+}
+function renderTabs() {
+  const d = currentDoc || {};
+  $("tab-entities").innerHTML = table(d.entities, ["id","type","name"]);
+  $("tab-claims").innerHTML = (d.claims||[]).map(c =>
+    `<div class="node">${pill(c.kind)} <b>${c.id}</b><br>${c.subject} · ${c.predicate} · ${fmt(c.object)}</div>`
+  ).join("") || `<p style="color:var(--muted)">none</p>`;
+  $("tab-relations").innerHTML = table(d.relations, ["id","type","from","to"]);
+  $("tab-timeline").innerHTML = (d.timeline||[]).map(iv =>
+    `<div class="node">${iv.start}–${iv.end??""} · ${(iv.events||[]).map(e=>e.type+(e.entity?":"+e.entity:"")+(e.claim?":"+e.claim:"")).join(", ")}</div>`
+  ).join("") || `<p style="color:var(--muted)">none</p>`;
+  $("raw").value = JSON.stringify(d, null, 2);
+}
+function readMetaIntoDoc() {
+  if (!currentDoc) currentDoc = { twk: "0.2", media: {} };
+  currentDoc.id = $("f-id").value;
+  currentDoc.kind = $("f-kind").value;
+  currentDoc.title = $("f-title").value;
+  currentDoc.media = currentDoc.media || {};
+  currentDoc.media.uri = $("f-uri").value;
+  const dur = Number($("f-dur").value);
+  if (!Number.isNaN(dur) && $("f-dur").value !== "") currentDoc.media.duration = dur;
+}
+async function openFile(name) {
+  const pack = await api("/api/docs/" + encodeURIComponent(name));
+  currentFile = name;
+  currentDoc = pack.doc;
+  $("status").textContent = name;
+  paintReport(pack.report);
+  bindMeta();
+  renderTabs();
+  listFiles();
+  probe();
+  graph();
+}
+function paintReport(r) {
+  if (!r) { $("report").textContent = ""; return; }
+  if (r.ok) $("report").innerHTML = `<span class="ok">valid</span>` + (r.warnings||[]).map(w => ` <span class="warn">${w}</span>`).join("");
+  else $("report").innerHTML = (r.errors||[]).map(e => `<span class="bad">${e}</span>`).join(" ");
+}
+async function save() {
+  if ($("tab-json").hidden === false) currentDoc = JSON.parse($("raw").value);
+  else readMetaIntoDoc();
+  const name = $("f-file").value || currentFile;
+  const res = await api("/api/docs/" + encodeURIComponent(name), {
+    method: "PUT",
+    body: JSON.stringify({ doc: currentDoc })
+  });
+  paintReport(res.report);
+  currentFile = name;
+  $("status").textContent = res.ok ? "saved " + name : (res.error || "save failed");
+  listFiles();
+}
+async function probe() {
+  if (!currentFile) return;
+  const t = Number($("t").value || 0);
+  const ctx = await api(`/api/context?file=${encodeURIComponent(currentFile)}&t=${t}`);
+  $("ctx").innerHTML = ctx.empty
+    ? `<em style="color:var(--muted)">empty context at ${t}</em>`
+    : [
+        ...(ctx.chapters||[]).map(c => `<div class="node">ch ${c.title||c.id}</div>`),
+        ...(ctx.entities||[]).map(e => `<div class="node">entity ${e.name} <small>${e.type}</small></div>`),
+        ...(ctx.claims||[]).map(c => `<div class="node">${pill(c.kind)} ${c.id}</div>`),
+        ...(ctx.relations||[]).map(r => `<div class="node">rel ${r.type} ${r.from} → ${r.to}</div>`),
+      ].join("");
+}
+async function graph() {
+  if (!currentFile) return;
+  const g = await api(`/api/graph?file=${encodeURIComponent(currentFile)}`);
+  $("graph").innerHTML =
+    `<div class="node">${(g.nodes||[]).length} nodes · ${(g.edges||[]).length} edges</div>` +
+    (g.edges||[]).slice(0, 40).map(e => `<div class="node">${e.type}: ${e.from} → ${e.to}</div>`).join("");
+}
+$("files").addEventListener("click", ev => {
+  const f = ev.target.closest("[data-file]");
+  if (f) openFile(f.dataset.file);
+});
+document.querySelectorAll("[data-tab]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("[data-tab]").forEach(b => b.classList.remove("on"));
+    btn.classList.add("on");
+    ["meta","entities","claims","relations","timeline","json"].forEach(id => {
+      $("tab-"+id).hidden = id !== btn.dataset.tab;
+    });
+  });
+});
+$("btn-reload").onclick = listFiles;
+$("btn-save").onclick = save;
+$("btn-validate").onclick = async () => {
+  if ($("tab-json").hidden === false) currentDoc = JSON.parse($("raw").value);
+  else readMetaIntoDoc();
+  paintReport(await api("/api/validate", { method: "POST", body: JSON.stringify({ doc: currentDoc }) }));
+};
+$("btn-delete").onclick = async () => {
+  if (!currentFile || !confirm("Delete " + currentFile + "?")) return;
+  await api("/api/docs/" + encodeURIComponent(currentFile), { method: "DELETE" });
+  currentFile = null; currentDoc = null; listFiles();
+};
+$("btn-ctx").onclick = probe;
+$("btn-new").onclick = () => {
+  currentFile = "untitled.twk";
+  currentDoc = { twk: "0.2", id: "twk:aa/episode/untitled", kind: "document", title: "", media: { uri: "https://example.org/media" } };
+  bindMeta(); renderTabs();
+};
+$("btn-patch").onclick = async () => {
+  const item = JSON.parse($("p-item").value);
+  const res = await api("/api/patch", {
+    method: "POST",
+    body: JSON.stringify({ file: currentFile, collection: $("p-col").value, item })
+  });
+  if (res.doc) { currentDoc = res.doc; renderTabs(); bindMeta(); }
+  paintReport(res.report);
+  graph();
+};
+listFiles().then(() => openFile("drumm-pyramids.document.twk").catch(() => {}));
+</script>
+</body>
+</html>
