@@ -2,6 +2,8 @@
 
 Every `.twk` in this directory is loaded by `kg/server/server.py` on boot.
 
+How the seeds were built: [RESEARCH-METHODS.md](./RESEARCH-METHODS.md) (canonical copy also at `kg/RESEARCH-METHODS.md`).
+
 ## American Alchemy
 
 Guest hypotheses stay `asserted-in-media`. Places, people, and catalog works stay contrast facts.

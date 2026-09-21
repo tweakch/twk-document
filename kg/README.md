@@ -8,6 +8,8 @@ Public-source, Wikidata-aligned graph layers.
 Guest / newsletter hypotheses stay `asserted-in-media`.
 Catalog identities (Wikidata people, places, orgs, works) live as `external-fact`.
 
+How the seeds were built, step by step: [RESEARCH-METHODS.md](RESEARCH-METHODS.md).
+
 ## Run the server
 
 ```bash
