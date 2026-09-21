@@ -1,0 +1,36 @@
+{
+  "twk": "0.2",
+  "id": "twk:example/outback-001",
+  "kind": "manifest",
+  "title": "Walking the West MacDonnells",
+  "language": "en",
+  "clock": { "kind": "media-time" },
+  "media": {
+    "uri": "https://example.org/outback.mp3",
+    "type": "audio",
+    "mime": "audio/mpeg",
+    "duration": 7423.42,
+    "identity": { "type": "sha256", "value": "abc123" }
+  },
+  "structure": {
+    "chapters": [
+      { "id": "chapter:leaving-alice", "title": "Leaving Alice Springs", "start": 700, "end": 900 },
+      { "id": "chapter:sonder-to-hermannsburg", "title": "Mount Sonder to Hermannsburg", "start": 900, "end": 1400 }
+    ]
+  },
+  "composition": {
+    "dictionary": {
+      "uri": "dictionary.twk"
+    },
+    "windowHintSeconds": 90,
+    "shards": [
+      { "id": "shard:0000-0600", "uri": "shards/0000-0600.twk", "start": 0, "end": 600, "bytes": 8120 },
+      { "id": "shard:0540-1200", "uri": "shards/0540-1200.twk", "start": 540, "end": 1200, "bytes": 19440 },
+      { "id": "shard:1140-1800", "uri": "shards/1140-1800.twk", "start": 1140, "end": 1800, "bytes": 16110 }
+    ]
+  },
+  "provenance": {
+    "revision": 17,
+    "contentHash": "sha256:manifest-def456"
+  }
+}

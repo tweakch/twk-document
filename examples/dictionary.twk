@@ -1,0 +1,49 @@
+{
+  "twk": "0.2",
+  "id": "twk:example/outback-001",
+  "kind": "dictionary",
+  "media": {
+    "uri": "https://example.org/outback.mp3",
+    "identity": { "type": "sha256", "value": "abc123" }
+  },
+  "speakers": [
+    { "id": "speaker:host", "name": "Alex", "role": "host" },
+    { "id": "speaker:ranger", "name": "John Smith", "role": "guest", "entity": "entity:john-smith" }
+  ],
+  "entities": [
+    {
+      "id": "entity:alice-springs",
+      "type": "place",
+      "name": "Alice Springs",
+      "geo": { "lat": -23.698, "lon": 133.88 },
+      "external": [{ "system": "wikidata", "id": "Q3235" }]
+    },
+    {
+      "id": "entity:hermannsburg",
+      "type": "place",
+      "name": "Hermannsburg",
+      "aliases": ["Ntaria"],
+      "geo": { "lat": -23.945, "lon": 132.776 }
+    },
+    {
+      "id": "entity:mount-sonder",
+      "type": "place",
+      "name": "Mount Sonder",
+      "aliases": ["Rwetyepme"],
+      "geo": { "lat": -23.585, "lon": 132.811, "elevation": 1380, "unit": "m" }
+    },
+    {
+      "id": "entity:john-smith",
+      "type": "person",
+      "name": "John Smith"
+    }
+  ],
+  "sources": [
+    {
+      "id": "source:wikidata-alice",
+      "type": "website",
+      "uri": "https://www.wikidata.org/wiki/Q3235",
+      "title": "Alice Springs"
+    }
+  ]
+}

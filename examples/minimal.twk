@@ -1,0 +1,8 @@
+{
+  "twk": "0.2",
+  "id": "twk:example/episode-001",
+  "kind": "document",
+  "media": {
+    "uri": "https://example.com/episode.mp3"
+  }
+}

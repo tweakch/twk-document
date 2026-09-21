@@ -1,0 +1,51 @@
+{
+  "twk": "0.2",
+  "id": "twk:example/outback-001",
+  "kind": "shard",
+  "media": {
+    "uri": "https://example.org/outback.mp3",
+    "identity": { "type": "sha256", "value": "abc123" }
+  },
+  "transcript": {
+    "language": "en",
+    "segments": [
+      {
+        "id": "seg-001",
+        "start": 731.42,
+        "end": 735.81,
+        "speaker": "speaker:ranger",
+        "text": "We travelled from Alice Springs to Hermannsburg."
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "start": 731.42,
+      "end": 735.81,
+      "events": [
+        {
+          "type": "mention",
+          "entity": "entity:alice-springs",
+          "confidence": 0.97,
+          "salience": 0.86
+        },
+        {
+          "type": "mention",
+          "entity": "entity:hermannsburg",
+          "confidence": 0.94,
+          "salience": 0.9
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "relation:journey-001",
+      "type": "travel",
+      "from": "entity:alice-springs",
+      "to": "entity:hermannsburg",
+      "start": 731.42,
+      "end": 812.2
+    }
+  ]
+}
