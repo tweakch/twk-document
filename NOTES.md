@@ -1,7 +1,6 @@
-Remaining follow-up from the first import:
+Imported. Remaining large snapshot still local only:
 
-- `schema/twk-0.2.schema.json` (also copied beside the KG server)
-- `kg/american-alchemy/*.twk` and `kg/repo/*.twk` pilot seeds
-- `kg/server/static/admin.html`
+- `kg/american-alchemy/drumm-pyramids.dictionary.twk` (full entity/source catalog)
 
-Server code is on main (`kg/server/server.py`, `kg/server/twk_lib.py`).
+The episode document the server boots on is `kg/repo/drumm-pyramids.document.twk`.
+Copy the dictionary into `kg/repo/` next to it when you pull the working-tree snapshot.
